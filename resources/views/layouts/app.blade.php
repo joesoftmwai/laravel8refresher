@@ -20,29 +20,55 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Posts</a>
+                <a class="nav-link" href="{{ route('posts') }}">Posts</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Dashboard</a>
+                <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
               </li>
             </ul>
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <!--  @if (auth()->user())
                 <li class="nav-item">
-                  <a class="nav-link" aria-current="page" href="#">Joesoft</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ route('register') }}">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" aria-current="page" href="#">Joesoft</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Logout</a>
+                  </li>
+                @else
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Logout</a>
-                </li>
+                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Login</a>
+                    </li>
+                @endif
+                -->
+
+                @auth
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">{{ auth()->user()->name }}</a>
+                  </li>
+                  <li class="nav-item">
+                      <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="btn btn-sm btn-outline-warning mt-1" type="submit">Logout</button>
+                      </form>
+                  </li>
+                @endauth
+
+                @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    </li>
+                @endguest
+                
               </ul>
           </div>
         </div>
