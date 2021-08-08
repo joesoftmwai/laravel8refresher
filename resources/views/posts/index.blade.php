@@ -19,6 +19,12 @@
                     
                     <button type="submit" class="btn btn-primary w-100">Submit</button>
                 </form>
+
+                @if ($posts->count())
+                    
+                @else
+                    <div class="alert alert-warnig">No posts found</div>
+                @endif
             </div>
        </div>
     </div>
